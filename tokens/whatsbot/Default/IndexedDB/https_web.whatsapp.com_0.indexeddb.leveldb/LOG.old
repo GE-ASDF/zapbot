@@ -1,0 +1,49 @@
+2023/06/14-15:04:36.763 35f8 Reusing MANIFEST C:\Users\Anderson\Desktop\zapBot\tokens\whatsbot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/06/14-15:04:36.764 35f8 Recovering log #850
+2023/06/14-15:04:36.828 35f8 Reusing old log C:\Users\Anderson\Desktop\zapBot\tokens\whatsbot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000850.log 
+2023/06/14-15:04:48.352 35f8 Level-0 table #871: started
+2023/06/14-15:04:48.408 35f8 Level-0 table #871: 1229542 bytes OK
+2023/06/14-15:04:48.410 35f8 Delete type=0 #850
+2023/06/14-15:04:48.720 2d78 Compacting 1@0 + 0@1 files
+2023/06/14-15:04:48.772 2d78 Generated table #872@0: 20841 keys, 521537 bytes
+2023/06/14-15:04:48.775 2d78 Generated table #873@0: 658 keys, 15951 bytes
+2023/06/14-15:04:48.775 2d78 Compacted 1@0 + 0@1 files => 537488 bytes
+2023/06/14-15:04:48.776 2d78 compacted to: files[ 0 2 24 0 0 0 0 ]
+2023/06/14-15:04:48.887 35f8 Compacting 1@1 + 9@2 files
+2023/06/14-15:04:49.007 35f8 Generated table #874@1: 51195 keys, 2232914 bytes
+2023/06/14-15:04:49.099 35f8 Generated table #875@1: 4784 keys, 2170003 bytes
+2023/06/14-15:04:49.216 35f8 Generated table #876@1: 4729 keys, 2167827 bytes
+2023/06/14-15:04:49.334 35f8 Generated table #877@1: 4416 keys, 2166577 bytes
+2023/06/14-15:04:49.443 35f8 Generated table #878@1: 4507 keys, 2166776 bytes
+2023/06/14-15:04:49.549 35f8 Generated table #879@1: 14911 keys, 2175917 bytes
+2023/06/14-15:04:49.695 35f8 Generated table #880@1: 33312 keys, 2240723 bytes
+2023/06/14-15:04:49.828 35f8 Generated table #881@1: 29139 keys, 2249908 bytes
+2023/06/14-15:04:49.950 35f8 Generated table #882@1: 24138 keys, 2210181 bytes
+2023/06/14-15:04:49.957 35f8 Generated table #883@1: 424 keys, 138591 bytes
+2023/06/14-15:04:49.957 35f8 Compacted 1@1 + 9@2 files => 19919417 bytes
+2023/06/14-15:04:49.958 35f8 compacted to: files[ 0 1 25 0 0 0 0 ]
+2023/06/14-15:04:49.959 35f8 Delete type=2 #871
+2023/06/14-15:04:52.599 35f8 Compacting 1@1 + 5@2 files
+2023/06/14-15:04:52.765 35f8 Generated table #884@1: 102732 keys, 2254285 bytes
+2023/06/14-15:04:52.903 35f8 Generated table #885@1: 107839 keys, 2259338 bytes
+2023/06/14-15:04:53.042 35f8 Generated table #886@1: 106029 keys, 2257670 bytes
+2023/06/14-15:04:53.179 35f8 Generated table #887@1: 106571 keys, 2256677 bytes
+2023/06/14-15:04:53.268 35f8 Generated table #888@1: 71863 keys, 1533858 bytes
+2023/06/14-15:04:53.268 35f8 Compacted 1@1 + 5@2 files => 10561828 bytes
+2023/06/14-15:04:53.269 35f8 compacted to: files[ 0 0 25 0 0 0 0 ]
+2023/06/14-15:04:53.269 35f8 Delete type=2 #854
+2023/06/14-15:04:53.269 35f8 Delete type=2 #855
+2023/06/14-15:04:53.269 35f8 Delete type=2 #856
+2023/06/14-15:04:53.269 35f8 Delete type=2 #857
+2023/06/14-15:04:53.269 35f8 Delete type=2 #858
+2023/06/14-15:04:53.269 35f8 Delete type=2 #859
+2023/06/14-15:04:53.269 35f8 Delete type=2 #860
+2023/06/14-15:04:53.269 35f8 Delete type=2 #861
+2023/06/14-15:04:53.269 35f8 Delete type=2 #862
+2023/06/14-15:04:53.270 35f8 Delete type=2 #864
+2023/06/14-15:04:53.270 35f8 Delete type=2 #865
+2023/06/14-15:04:53.270 35f8 Delete type=2 #866
+2023/06/14-15:04:53.270 35f8 Delete type=2 #867
+2023/06/14-15:04:53.270 35f8 Delete type=2 #868
+2023/06/14-15:04:53.270 35f8 Delete type=2 #872
+2023/06/14-15:04:53.270 35f8 Delete type=2 #873

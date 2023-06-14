@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mensagens Recebidas</title>
+  <style>
+    .mensagem-usuario {
+      text-align: right;
+      background-color: #eaf6ff;
+      padding: 5px;
+      margin: 5px 0;
+    }
+    
+    .mensagem-outro-usuario {
+      text-align: left;
+      background-color: #f2f2f2;
+      padding: 5px;
+      margin: 5px 0;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    socket.on('nova-mensagem', function (data) {
+      exibirMensagem(data);
+    });
+
+    function exibirMensagem(data) {
+      let mensagensList = document.getElementById("mensagens-list")
+      data.forEach( i => {
+        if(mensagensList.innerHTML == ""){
+          mensagensList.innerHTML = `<ul id="${i.usuario}">
+            <li>${i.usuario}</li>
+            </ul>
+            `
+          }else{
+            let allUl =Array.from(mensagensList.querySelectorAll("ul"))
+            allUl.forEach(ul =>{
+              if(ul.id != data.usuario){
+                mensagensList.innerHTML += `<ul id="${i.usuario}">
+                <li>${i.usuario}</li>
+                </ul>
+                `
+              }
+            })
+            
+          }
+      })
+      console.log(mensagensList)
+      console.log(data);
+      // let mensagemElement = $('<div>');
+      //   var link = $('<a>', {
+      //   href: "encerrar-conversa",
+      //   text: 'Encerrar conversa'
+      // });
+      // if (data.usuario === 'usuario_atual') {
+      //   mensagemElement.addClass('mensagem-usuario');
+      // } else {
+      //   mensagemElement.addClass('mensagem-outro-usuario');
+      // }
+      
+      // mensagemElement.text(data.mensagem.body);
+      // $('#mensagens-list').append(mensagemElement).append(link);
+    }
+  </script>
+</head>
+<body>
+  <h1>Mensagens Recebidas:</h1>
+  <div id="mensagens-list">
+ 
+  </div>
+</body>
+</html>
