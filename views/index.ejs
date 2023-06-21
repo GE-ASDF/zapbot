@@ -1,74 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Mensagens Recebidas</title>
-  <style>
-    .mensagem-usuario {
-      text-align: right;
-      background-color: #eaf6ff;
-      padding: 5px;
-      margin: 5px 0;
-    }
-    
-    .mensagem-outro-usuario {
-      text-align: left;
-      background-color: #f2f2f2;
-      padding: 5px;
-      margin: 5px 0;
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
-
-    socket.on('nova-mensagem', function (data) {
-      exibirMensagem(data);
-    });
-
-    function exibirMensagem(data) {
-      let mensagensList = document.getElementById("mensagens-list")
-      data.forEach( i => {
-        if(mensagensList.innerHTML == ""){
-          mensagensList.innerHTML = `<ul id="${i.usuario}">
-            <li>${i.usuario}</li>
-            </ul>
-            `
-          }else{
-            let allUl =Array.from(mensagensList.querySelectorAll("ul"))
-            allUl.forEach(ul =>{
-              if(ul.id != data.usuario){
-                mensagensList.innerHTML += `<ul id="${i.usuario}">
-                <li>${i.usuario}</li>
-                </ul>
-                `
-              }
-            })
-            
-          }
-      })
-      console.log(mensagensList)
-      console.log(data);
-      // let mensagemElement = $('<div>');
-      //   var link = $('<a>', {
-      //   href: "encerrar-conversa",
-      //   text: 'Encerrar conversa'
-      // });
-      // if (data.usuario === 'usuario_atual') {
-      //   mensagemElement.addClass('mensagem-usuario');
-      // } else {
-      //   mensagemElement.addClass('mensagem-outro-usuario');
-      // }
-      
-      // mensagemElement.text(data.mensagem.body);
-      // $('#mensagens-list').append(mensagemElement).append(link);
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
-  <h1>Mensagens Recebidas:</h1>
-  <div id="mensagens-list">
- 
-  </div>
+    <div class="mensagem d-flex justify-content-center m-2 flex-column align-items-start">
+    
+
+    </div>
+    <h1>Mensagem dos usuários</h1>
+    <ul id="user-list"></ul>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+    
+      // Atualizar a lista de usuários no front-end
+      const updateUserList = (users) => {
+        const userList = document.getElementById('user-list');
+        const mensagem = document.querySelector(".mensagem")
+        userList.innerHTML = '';
+        mensagem.innerHTML = '';
+        users.forEach((user) => {
+            const alert = document.createElement("div");
+            const message = document.createElement("div");
+            const close = document.createElement("div");
+            alert.classList.add("alert")
+            alert.classList.add("alert-success")
+            message.textContent = `Há uma nova mensagem do usuário: ${user.replace("@c.us", "")}`
+            close.classList.add("btn")
+            close.classList.add("btn-danger")
+            close.classList.add("close")
+            close.textContent = "X"
+            alert.appendChild(message)
+            alert.appendChild(close)
+            mensagem.append(alert);
+          const li = document.createElement('li');
+          const link = document.createElement("a");
+          link.textContent = "Finalizar atendimento";
+          link.setAttribute("href", `/finalizar-chat?user=${user}`);
+          li.textContent = user;
+          li.appendChild(link);
+          userList.append(li);
+        });
+      };
+    
+      // Receber a lista de usuários atualizada do servidor
+      socket.on('users', (users) => {
+        updateUserList(users);
+        Array.from(document.querySelectorAll(".close")).forEach((i)=>{
+            i.addEventListener("click", (e)=>{
+                console.log(e.target.parentNode.remove())
+            })
+        })
+        setTimeout(() => {
+        Array.from(document.querySelectorAll(".close")).forEach((i)=>{
+            i.parentNode.remove()
+        })
+      }, 1000 * 60);
+      });
+    
+      
+      // Outro código do seu cliente...
+    </script>
+    
 </body>
 </html>
