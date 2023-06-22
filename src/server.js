@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
+const fs = require("fs");
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
-
+app.use(express.static('public'))
 const http = require("http").createServer(app);
 const io = require("socket.io")(http)
 const wppconnect = require('@wppconnect-team/wppconnect');
@@ -19,10 +20,37 @@ let atendimentoHumanoAtivo = false;
 // };
 let mensagensRecebidas = [];
 let users = [];
+
 const wppSession = wppconnect.create({
     session: 'whatsbot',
     autoClose: false,
-    puppeteerOptions: { args: ['--no-sandbox'] }
+    puppeteerOptions: { args: ['--no-sandbox'] },
+    catchQR: (base64Qr, asciiQR) => {
+        console.log(asciiQR); // Optional to log the QR in the terminal
+
+        var matches = base64Qr.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+          response = {};
+  
+        if (matches.length !== 3) {
+          return new Error('Invalid input string');
+        }
+        response.type = matches[1];
+        response.data = new Buffer.from(matches[2], 'base64');
+  
+        var imageBuffer = response;
+        require('fs').writeFile(
+          'public/out.png',
+          imageBuffer['data'],
+          'binary',
+          function (err) {
+            if (err != null) {
+              console.log(err);
+            }
+          }
+        );
+          io.emit("img");
+      },
+      logQR: false,
 })
 
 async function findStudent(studentName){
@@ -82,6 +110,7 @@ const AJUDA = [{},
 ]
 
 wppSession.then((client)=>{
+    io.emit("conectado");
     client.onMessage((message)=>{
         
         if(message.from == "558596541425@c.us"){
@@ -219,6 +248,7 @@ async function sendContactInfo(client, sendTo, contato, name) {
 
 io.on('connection', (socket)=>{
     console.log("Novo cliente conectado");
+    socket.emit("img");
     socket.emit('users', users);
     socket.on('disconnect', ()=>{
         console.log("Cliente desconectado");
@@ -232,11 +262,10 @@ app.get('/', (req, res)=>{
     // res.status(200).send('Mensagens recebidas');
 })
 
-app.get('/encerrar-conversa', (req, res)=>{
-    res.render("encerrar")
+app.get("/messages", (req, res)=>{
+
+    res.render("messages", {users});
 })
-
-
 app.get('/finalizar-chat', (req, res) => {
     const { user } = req.query;
     console.log(user);
@@ -258,7 +287,7 @@ app.get('/finalizar-chat', (req, res) => {
     }
   
     // Retornar uma resposta de erro caso o usuário não exista
-    return res.status(404).send('Usuário não encontrado');
+    // return res.status(404).send('Usuário não encontrado');
   });
 
 
